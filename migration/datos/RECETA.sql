@@ -1,0 +1,3 @@
+insert into main.RECETA (id_receta, nombre_receta, tipo_comida, preparacion)
+values  (1, 'Huevos revueltos', 'Desayuno', '1. En un sartén, poner una cucharadita de aceite y poner a fuego alto. 2. Vertir el contenido de 2 huevos en un plato hondo, añadir 2 gramos de sal y revolver. 3. Vertir el resultado del paso anterior en la sartén. 4. Esperar a que los huevos estén cocinados al gusto y servir.'),
+        (2, 'Sudado de pollo y papa', 'Almuerzo', '1. En una olla alta sofreír la cebolla, el tomate y el ajo hasta que se vea cocido. 2. Agregar el pollo desmenuzado, el agua, las papas. 3. Dejar cocinar hasta que la papa esté blandita y el pollo cocido por dentro (20 minutos aproximdamente) ');
