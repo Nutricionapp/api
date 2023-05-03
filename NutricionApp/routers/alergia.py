@@ -18,6 +18,6 @@ def get_allergies(db: Session = Depends(get_db)):
 def create_allergy(request: schemas.Alergia, db: Session = Depends(get_db)):
     return alergia.create(request, db)
 
-@router.get('/{id}', response_model=schemas.ShowAlergia)
-def get_allergy(id: int, db: Session = Depends(get_db)):
-    return alergia.show(id, db)
+@router.get('/{id_usuario}', response_model=List[schemas.ShowAlergia])
+def get_allergy(id_usuario: int, db: Session = Depends(get_db)):
+    return alergia.show(id_usuario, db)

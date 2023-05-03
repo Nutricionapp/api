@@ -18,14 +18,14 @@ class Ingrediente(Base):
     cantidad_calorias=Column(Integer)
     id_categoria=Column(Integer,ForeignKey('CATEGORIA_INGREDIENTE.id_categoria'))
     categoria=relationship("CategoriaIngrediente",back_populates="ingrediente")
-    alergia=relationship("Alergia",back_populates="ingrediente")
+    alergia=relationship("Alergia",back_populates="ingredient")
 
 class Alergia(Base):
     __tablename__='ALERGIA'
     id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'),primary_key=True,index=True)
     id_ingrediente=Column(Integer,ForeignKey('INGREDIENTE.id_ingrediente'),primary_key=True,index=True)
     usuario=relationship("Usuario",back_populates='alergias')
-    ingrediente=relationship("Ingrediente",back_populates='alergia')
+    ingredient=relationship("Ingrediente",back_populates='alergia')
 
 class CategoriaIngrediente(Base):
     __tablename__='CATEGORIA_INGREDIENTE'

@@ -16,7 +16,7 @@ def create(request: schemas.Alergia, db: Session):
     return new_alergia
 
 def show(id_usuario: int, db: Session):
-    alergia = db.query(models.Alergia).filter(models.Alergia.id_usuario == id_usuario).first()
+    alergia = db.query(models.Alergia).filter(models.Alergia.id_usuario == id_usuario).all()
     if not alergia:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"El usuario {id_usuario} no tiene registrada ninguna alergia")

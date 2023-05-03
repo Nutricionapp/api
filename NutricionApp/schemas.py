@@ -8,6 +8,7 @@ class Usuario(BaseModel):
     fecha_nacimiento: date
     id_estilo_vida: int
     class Config(): orm_mode=True
+
 class EstiloVida(BaseModel):
     nombre_estilo: str
     class Config(): orm_mode=True
@@ -30,6 +31,7 @@ class CategoriaIngrediente(BaseModel):
 class ShowEstilo(BaseModel):
     nombre_estilo: str
     class Config(): orm_mode=True
+
 class ShowUser(BaseModel):
     nombre_usuario:str
     estilo: ShowEstilo
@@ -45,7 +47,10 @@ class ShowIngrediente(BaseModel):
     categoria: ShowCategoriaIngrediente
     class Config(): orm_mode=True
 
-class ShowAlergia(BaseModel):
+class ShowAlergiaUsuario(BaseModel):
+    ingredient: ShowIngrediente
+    class Config(): orm_mode=True
+class ShowAlergias(BaseModel):
     usuario: ShowUser
-    ingrediente: ShowIngrediente
+    ingredient: ShowIngrediente
     class Config(): orm_mode=True
