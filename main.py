@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from NutricionApp import models
 from NutricionApp.database import engine
-from NutricionApp.routers import estilo_vida,usuario,categoria_ingrediente,ingrediente,alergia
+from NutricionApp.routers import estilo_vida,usuario,categoria_ingrediente,ingrediente,alergia,estatura,peso,receta
 
 app = FastAPI()
 
@@ -11,3 +11,7 @@ app.include_router(usuario.router)
 app.include_router(categoria_ingrediente.router)
 app.include_router(ingrediente.router)
 app.include_router(alergia.router)
+app.include_router(estatura.router)
+app.include_router(peso.router)
+app.include_router(receta.router)
+
