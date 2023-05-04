@@ -12,6 +12,7 @@ class Usuario(Base):
     alergias=relationship("Alergia",back_populates="usuario")
     estaturas=relationship("Estatura",back_populates="usuario_e")
     pesos=relationship("Peso",back_populates="usuario_p")
+    enfermedades=relationship("EnfermedadUsuario",back_populates="usuarios_e")
 
 class Ingrediente(Base):
     __tablename__='INGREDIENTE'
@@ -54,7 +55,18 @@ class IngredienteReceta(Base):
     recetas=relationship("Receta",back_populates="ingredientes_r")
     ingredientes=relationship("Ingrediente",back_populates="receta")
 
+class Enfermedad(Base):
+    __tablename__='ENFERMEDAD'
+    id_enfermedad=Column(Integer,primary_key=True,index=True,autoincrement=True)
+    nombre_enfermedad=Column(String)
+    usuarios=relationship("EnfermedadUsuario",back_populates="enfermedades_u")
 
+class EnfermedadUsuario(Base):
+    __tablename__='ENFERMEDAD_USUARIO'
+    id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'),primary_key=True,index=True)
+    id_enfermedad=Column(Integer,ForeignKey('ENFERMEDAD.id_enfermedad'),primary_key=True,index=True)
+    usuarios_e=relationship("Usuario",back_populates="enfermedades")
+    enfermedades_u=relationship("Enfermedad",back_populates="usuarios")
 
 class CategoriaIngrediente(Base):
     __tablename__='CATEGORIA_INGREDIENTE'
@@ -74,4 +86,4 @@ class Receta(Base):
     nombre_receta=Column(String)
     tipo_comida=Column(String)
     preparacion=Column(String)
-    ingredientes_r=relationship("IngredienteReciente",back_populates="recetas")
+    ingredientes_r=relationship("IngredienteReceta",back_populates="recetas")

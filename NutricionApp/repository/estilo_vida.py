@@ -6,7 +6,7 @@ def get_all(db: Session):
     estilos = db.query(models.EstiloVida).all()
     return estilos
 def create(request: schemas.EstiloVida, db: Session):
-    new_style = models.Usuario(id_estilo=request.id_estilo,nombre_estilo=request.nombre_estilo)
+    new_style = models.EstiloVida(nombre_estilo=request.nombre_estilo)
     db.add(new_style)
     db.commit()
     db.refresh(new_style)

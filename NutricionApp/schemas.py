@@ -46,6 +46,19 @@ class Receta(BaseModel):
     preparacion: str
     class Config(): orm_mode=True
 
+class Enfermedad(BaseModel):
+    id_enfermedad: Optional[int]
+    nombre_enfermedad: str
+    class Config(): orm_mode=True
+
+class EnfermedadUsuario(BaseModel):
+    id_usuario: int
+    id_enfermedad: int
+    class Config(): orm_mode=True
+class ShowEnfermedadUsuario(BaseModel):
+    enfermedades_u: Enfermedad
+    class Config(): orm_mode=True
+
 class ShowReceta(BaseModel):
     nombre_receta: str
     tipo_comida: str
