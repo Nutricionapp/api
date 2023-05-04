@@ -3,7 +3,22 @@ from NutricionApp import models
 from NutricionApp.database import engine
 from NutricionApp.routers import estilo_vida,usuario,categoria_ingrediente,ingrediente,alergia,estatura,peso,receta,enfermedad,enfermedad_usuario,rutina,objetivo
 
+
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 models.Base.metadata.create_all(engine)
 app.include_router(estilo_vida.router)
