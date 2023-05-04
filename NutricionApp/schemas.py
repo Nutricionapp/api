@@ -112,3 +112,37 @@ class ShowRecetaIngredientes(BaseModel):
     ingredientes: List[ShowIngredienteUsado]
     preparacion: str
     class Config(): orm_mode=True
+
+class Objetivo(BaseModel):
+    id_objetivo: Optional[int]
+    nombre_objetivo: str
+    class Config(): orm_mode = True
+
+class Rutina(BaseModel):
+    id_rutina: Optional[int]
+    cantidad_comidas: int
+    id_objetivo: int
+    calorias_diarias: float
+    vigente: int
+    id_usuario: int
+    class Config(): orm_mode = True
+
+class ShowObjetivo(BaseModel):
+    nombre_objetivo: str
+    class Config(): orm_mode = True
+
+class ShowRutina(BaseModel):
+    objetivo: ShowObjetivo
+    cantidad_comidas: int
+    calorias_diarias: int
+    vigente: int
+    class Config(): orm_mode = True
+
+class ShowRutinas(BaseModel):
+    cantidad_comidas: int
+    objetivo: ShowObjetivo
+    calorias_diarias: float
+    vigente: int
+    class Config(): orm_mode = True
+
+

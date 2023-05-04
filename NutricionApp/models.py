@@ -13,6 +13,7 @@ class Usuario(Base):
     estaturas=relationship("Estatura",back_populates="usuario_e")
     pesos=relationship("Peso",back_populates="usuario_p")
     enfermedades=relationship("EnfermedadUsuario",back_populates="usuarios_e")
+    rutinas_p=relationship("Rutina",back_populates="persona")
 
 class Ingrediente(Base):
     __tablename__='INGREDIENTE'
@@ -67,6 +68,24 @@ class EnfermedadUsuario(Base):
     id_enfermedad=Column(Integer,ForeignKey('ENFERMEDAD.id_enfermedad'),primary_key=True,index=True)
     usuarios_e=relationship("Usuario",back_populates="enfermedades")
     enfermedades_u=relationship("Enfermedad",back_populates="usuarios")
+
+class Objetivo(Base):
+    __tablename__='OBJETIVO'
+    id_objetivo=Column(Integer,primary_key=True,index=True,autoincrement=True)
+    nombre_objetivo=Column(String)
+    rutinas=relationship("Rutina",back_populates="objetivo")
+
+class Rutina(Base):
+    __tablename__='RUTINA'
+    id_rutina=Column(Integer,primary_key=True,index=True,autoincrement=True)
+    cantidad_comidas=Column(Integer)
+    id_objetivo=Column(Integer,ForeignKey('OBJETIVO.id_objetivo'))
+    calorias_diarias=Column(Float)
+    vigente=Column(Integer)
+    id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'))
+    objetivo=relationship("Objetivo",back_populates="rutinas")
+    persona=relationship("Usuario",back_populates="rutinas_p")
+
 
 class CategoriaIngrediente(Base):
     __tablename__='CATEGORIA_INGREDIENTE'
