@@ -4,16 +4,19 @@ from datetime import date
 
 
 class Usuario(BaseModel):
+    id_usuario: Optional[int]
     nombre_usuario: str
     fecha_nacimiento: date
     id_estilo_vida: int
     class Config(): orm_mode=True
 
 class EstiloVida(BaseModel):
+    id_estilo: Optional[int]
     nombre_estilo: str
     class Config(): orm_mode=True
 
 class Ingrediente(BaseModel):
+    id_ingrediente: Optional[int]
     nombre_ingrediente: str
     cantidad_calorias: int
     id_categoria: int
@@ -41,6 +44,7 @@ class Peso(BaseModel):
     class Config(): orm_mode = True
 
 class Receta(BaseModel):
+    id_receta: Optional[int]
     nombre_receta: str
     tipo_comdida: str
     preparacion: str
@@ -65,10 +69,12 @@ class ShowReceta(BaseModel):
     preparacion: str
     class Config(): orm_mode=True
 class ShowEstilo(BaseModel):
+    id_estilo: Optional[int]
     nombre_estilo: str
     class Config(): orm_mode=True
 
 class ShowUser(BaseModel):
+    id_usuario: Optional[int]
     nombre_usuario:str
     estilo: ShowEstilo
     class Config(): orm_mode=True
@@ -78,6 +84,7 @@ class ShowCategoriaIngrediente(BaseModel):
     class Config(): orm_mode=True
 
 class ShowIngrediente(BaseModel):
+    id_ingrediente: Optional[int]
     nombre_ingrediente: str
     cantidad_calorias: int
     categoria: ShowCategoriaIngrediente
@@ -128,10 +135,12 @@ class Rutina(BaseModel):
     class Config(): orm_mode = True
 
 class ShowObjetivo(BaseModel):
+    id_objetivo: Optional[int]
     nombre_objetivo: str
     class Config(): orm_mode = True
 
 class ShowRutina(BaseModel):
+    id_rutina: Optional[int]
     objetivo: ShowObjetivo
     cantidad_comidas: int
     calorias_diarias: int
@@ -139,6 +148,7 @@ class ShowRutina(BaseModel):
     class Config(): orm_mode = True
 
 class ShowRutinas(BaseModel):
+    id_rutina: Optional[int]
     cantidad_comidas: int
     objetivo: ShowObjetivo
     calorias_diarias: float
