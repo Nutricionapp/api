@@ -3,6 +3,9 @@ from sqlalchemy import desc
 from .. import models, schemas
 from fastapi import HTTPException, status
 
+def get_all(db: Session):
+    objetivos = db.query(models.Objetivo).all()
+    return objetivos
 
 def create(request: schemas.Objetivo, db: Session):
     new_objetivo = models.Objetivo(id_usuario=request.id_objetivo,
