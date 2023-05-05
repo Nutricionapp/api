@@ -11,14 +11,14 @@ router = APIRouter(
 get_db = database.get_db
 
 @router.get('/',response_model=List[schemas.ShowReceta])
-def get_allergies(db: Session = Depends(get_db)):
+def get_recipes(db: Session = Depends(get_db)):
     return receta.get_all(db)
 
 @router.post('/', response_model=schemas.ShowReceta)
-def create_style(request: schemas.Receta, db: Session = Depends(get_db)):
+def create_recipe(request: schemas.Receta, db: Session = Depends(get_db)):
     return receta.create(request, db)
 
 
 @router.get('/{id}', response_model=schemas.ShowReceta)
-def get_style(id: int, db: Session = Depends(get_db)):
+def get_recipe(id: int, db: Session = Depends(get_db)):
     return receta.show(id, db)

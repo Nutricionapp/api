@@ -28,6 +28,7 @@ class Alergia(BaseModel):
     class Config(): orm_mode=True
 
 class CategoriaIngrediente(BaseModel):
+    id_categoria: Optional[int]
     nombre_categoria: str
     class Config(): orm_mode=True
 

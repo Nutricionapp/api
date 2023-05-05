@@ -10,6 +10,10 @@ router = APIRouter(
 )
 get_db = database.get_db
 
+@router.get('/',response_model=List[schemas.ShowObjetivo])
+def get_goals(db: Session = Depends(get_db)):
+    return objetivo.get_all(db)
+
 @router.post('/', response_model=schemas.ShowObjetivo)
 def create_goal(request: schemas.Objetivo, db: Session = Depends(get_db)):
     return objetivo.create(request, db)
