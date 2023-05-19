@@ -8,6 +8,7 @@ class Usuario(BaseModel):
     nombre_usuario: str
     fecha_nacimiento: date
     id_estilo_vida: int
+    registro_completo: int
     class Config(): orm_mode=True
 
 class EstiloVida(BaseModel):
@@ -78,6 +79,7 @@ class ShowUser(BaseModel):
     id_usuario: Optional[int]
     nombre_usuario:str
     estilo: ShowEstilo
+    registro_completo: int
     class Config(): orm_mode=True
 
 class ShowCategoriaIngrediente(BaseModel):
@@ -110,15 +112,15 @@ class ShowPesoUsuario(BaseModel):
     class Config(): orm_mode = True
 
 class ShowIngredienteUsado(BaseModel):
-    nombre_ingrediente: str
-    cantidad_calorias: float
+    id_ingrediente: int
+    calorias_ingrediente: float
     class Config(): orm_mode = True
 
 class ShowRecetaIngredientes(BaseModel):
     nombre_receta: str
     tipo_comida: str
-    ingredientes: List[ShowIngredienteUsado]
     preparacion: str
+    ingredientes_r: List[ShowIngredienteUsado]
     class Config(): orm_mode=True
 
 class Objetivo(BaseModel):
@@ -155,5 +157,17 @@ class ShowRutinas(BaseModel):
     calorias_diarias: float
     vigente: int
     class Config(): orm_mode = True
+
+class ProgresoUsuario(BaseModel):
+    id_registro: Optional[int]
+    fecha: date
+    id_usuario: int
+    porcentaje_avance: float
+    class Config(): orm_mode=True
+
+class ShowProgresoUsuario(BaseModel):
+    fecha: date
+    porcentaje_avance: float
+    class Config(): orm_mode=True
 
 
