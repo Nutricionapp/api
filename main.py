@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from NutricionApp import models
 from NutricionApp.database import engine
-from NutricionApp.routers import estilo_vida,usuario,categoria_ingrediente,ingrediente,alergia,estatura,peso,receta,enfermedad,enfermedad_usuario,rutina,objetivo
+from NutricionApp.routers import estilo_vida,usuario,categoria_ingrediente,ingrediente,alergia,estatura,peso,receta,enfermedad,enfermedad_usuario,rutina,objetivo,progreso_usuario
 
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -33,5 +33,6 @@ app.include_router(enfermedad.router)
 app.include_router(enfermedad_usuario.router)
 app.include_router(rutina.router)
 app.include_router(objetivo.router)
+app.include_router(progreso_usuario.router)
 #
 

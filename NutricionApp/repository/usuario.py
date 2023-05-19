@@ -6,7 +6,8 @@ from fastapi import HTTPException, status
 def create(request: schemas.Usuario, db: Session):
     new_user = models.Usuario(nombre_usuario=request.nombre_usuario,
                               fecha_nacimiento=request.fecha_nacimiento,
-                              id_estilo_vida=request.id_estilo_vida)
+                              id_estilo_vida=request.id_estilo_vida,
+                              registro_completo=request.registro_completo)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

@@ -8,12 +8,14 @@ class Usuario(Base):
     nombre_usuario=Column(String)
     fecha_nacimiento=Column(Date)
     id_estilo_vida=Column(Integer,ForeignKey('ESTILO_VIDA.id_estilo'))
+    registro_completo=Column(Integer)
     estilo=relationship("EstiloVida",back_populates="people")
     alergias=relationship("Alergia",back_populates="usuario")
     estaturas=relationship("Estatura",back_populates="usuario_e")
     pesos=relationship("Peso",back_populates="usuario_p")
     enfermedades=relationship("EnfermedadUsuario",back_populates="usuarios_e")
     rutinas_p=relationship("Rutina",back_populates="persona")
+    progreso=relationship("ProgresoDiario",back_populates="usuario_pr")
 
 class Ingrediente(Base):
     __tablename__='INGREDIENTE'
@@ -53,6 +55,7 @@ class IngredienteReceta(Base):
     id_receta=Column(Integer,ForeignKey('RECETA.id_receta'),primary_key=True,index=True)
     id_ingrediente=Column(Integer,ForeignKey('INGREDIENTE.id_ingrediente'),primary_key=True,index=True)
     cantidad_ingrediente=Column(Float)
+    calorias_ingrediente=Column(Float)
     recetas=relationship("Receta",back_populates="ingredientes_r")
     ingredientes=relationship("Ingrediente",back_populates="receta")
 
@@ -106,3 +109,11 @@ class Receta(Base):
     tipo_comida=Column(String)
     preparacion=Column(String)
     ingredientes_r=relationship("IngredienteReceta",back_populates="recetas")
+
+class ProgresoDiario(Base):
+    __tablename__='PROGRESO_DIARIO'
+    id_registro=Column(Integer,primary_key=True,index=True,autoincrement=True)
+    fecha=Column(Date)
+    id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'))
+    porcentaje_avance=Column(Float)
+    usuario_pr=relationship("Usuario",back_populates="progreso")
