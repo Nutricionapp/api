@@ -69,6 +69,7 @@ class ShowReceta(BaseModel):
     nombre_receta: str
     tipo_comida: str
     preparacion: str
+    url_imagen: str
     class Config(): orm_mode=True
 class ShowEstilo(BaseModel):
     id_estilo: Optional[int]

@@ -108,6 +108,7 @@ class Receta(Base):
     nombre_receta=Column(String)
     tipo_comida=Column(String)
     preparacion=Column(String)
+    url_imagen=Column(String)
     ingredientes_r=relationship("IngredienteReceta",back_populates="recetas")
 
 class ProgresoDiario(Base):
