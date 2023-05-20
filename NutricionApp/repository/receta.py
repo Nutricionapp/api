@@ -9,7 +9,8 @@ def get_all(db: Session):
 def create(request: schemas.Receta, db: Session):
     new_recipe = models.Receta(nombre_receta=request.nombre_receta,
                                tipo_comida=request.tipo_comdida,
-                               preparacion=request.preparacion)
+                               preparacion=request.preparacion,
+                               url_imagen=request.url_imagen)
     db.add(new_recipe)
     db.commit()
     db.refresh(new_recipe)

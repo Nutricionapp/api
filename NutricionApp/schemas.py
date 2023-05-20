@@ -50,6 +50,7 @@ class Receta(BaseModel):
     nombre_receta: str
     tipo_comdida: str
     preparacion: str
+    url_imagen: str
     class Config(): orm_mode=True
 
 class Enfermedad(BaseModel):
