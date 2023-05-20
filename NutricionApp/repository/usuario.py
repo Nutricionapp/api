@@ -20,3 +20,10 @@ def show(id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"User with the id {id} is not available")
     return user
+
+def show_by_name(nombre: str, db: Session):
+    user = db.query(models.Usuario).filter(models.Usuario.nombre_usuario == nombre).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"User with the name {nombre} is not available")
+    return user
