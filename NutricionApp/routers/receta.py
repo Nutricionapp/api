@@ -22,3 +22,8 @@ def create_recipe(request: schemas.Receta, db: Session = Depends(get_db)):
 @router.get('/{id}', response_model=schemas.ShowRecetaIngredientes)
 def get_recipe(id: int, db: Session = Depends(get_db)):
     return receta.show(id, db)
+
+@router.get('/tipo_comida/{tipo_comida}', response_model=List[schemas.ShowReceta])
+def get_recipe_by_kind(tipo_comida: str, db: Session = Depends(get_db)):
+    return receta.show_tipo_comida(tipo_comida, db)
+
