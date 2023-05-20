@@ -19,3 +19,7 @@ def create_user(request: schemas.Usuario, db: Session = Depends(get_db)):
 @router.get('/{id}', status_code=200, response_model=schemas.ShowUser)
 def show(id: int, db: Session = Depends(get_db)):
     return usuario.show(id,db)
+
+@router.get('/nombre_usuario/{nombre}', status_code=200, response_model=schemas.ShowUser)
+def show_by_name(nombre: str, db: Session = Depends(get_db)):
+    return usuario.show_by_name(nombre,db)
