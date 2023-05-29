@@ -51,6 +51,7 @@ class Receta(BaseModel):
     tipo_comdida: str
     preparacion: str
     url_imagen: str
+    cantidad_calorias: float
     class Config(): orm_mode=True
 
 class Enfermedad(BaseModel):
@@ -71,6 +72,7 @@ class ShowReceta(BaseModel):
     tipo_comida: str
     preparacion: str
     url_imagen: str
+    cantidad_calorias: float
     class Config(): orm_mode=True
 class ShowEstilo(BaseModel):
     id_estilo: Optional[int]
@@ -122,6 +124,7 @@ class ShowRecetaIngredientes(BaseModel):
     nombre_receta: str
     tipo_comida: str
     preparacion: str
+    cantidad_calorias: float
     ingredientes_r: List[ShowIngredienteUsado]
     class Config(): orm_mode=True
 
