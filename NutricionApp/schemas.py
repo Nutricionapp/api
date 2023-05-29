@@ -9,6 +9,7 @@ class Usuario(BaseModel):
     fecha_nacimiento: date
     id_estilo_vida: int
     registro_completo: int
+    correo: str
     class Config(): orm_mode=True
 
 class EstiloVida(BaseModel):
@@ -84,6 +85,7 @@ class ShowUser(BaseModel):
     nombre_usuario:str
     estilo: ShowEstilo
     registro_completo: int
+    correo: str
     class Config(): orm_mode=True
 
 class ShowCategoriaIngrediente(BaseModel):
