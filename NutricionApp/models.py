@@ -9,6 +9,7 @@ class Usuario(Base):
     fecha_nacimiento=Column(Date)
     id_estilo_vida=Column(Integer,ForeignKey('ESTILO_VIDA.id_estilo'))
     registro_completo=Column(Integer)
+    correo=Column(String)
     estilo=relationship("EstiloVida",back_populates="people")
     alergias=relationship("Alergia",back_populates="usuario")
     estaturas=relationship("Estatura",back_populates="usuario_e")

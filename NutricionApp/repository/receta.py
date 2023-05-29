@@ -10,7 +10,8 @@ def create(request: schemas.Receta, db: Session):
     new_recipe = models.Receta(nombre_receta=request.nombre_receta,
                                tipo_comida=request.tipo_comdida,
                                preparacion=request.preparacion,
-                               url_imagen=request.url_imagen)
+                               url_imagen=request.url_imagen,
+                               cantidad_calorias=request.cantidad_calorias)
     db.add(new_recipe)
     db.commit()
     db.refresh(new_recipe)
