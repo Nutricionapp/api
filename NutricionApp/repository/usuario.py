@@ -8,7 +8,8 @@ def create(request: schemas.Usuario, db: Session):
                               fecha_nacimiento=request.fecha_nacimiento,
                               id_estilo_vida=request.id_estilo_vida,
                               registro_completo=request.registro_completo,
-                              correo=request.correo)
+                              correo=request.correo,
+                              sexo=request.sexo)
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
