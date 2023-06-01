@@ -10,11 +10,13 @@ class Usuario(BaseModel):
     id_estilo_vida: int
     registro_completo: int
     correo: str
+    sexo: str
     class Config(): orm_mode=True
 
 class EstiloVida(BaseModel):
     id_estilo: Optional[int]
     nombre_estilo: str
+    multiplicador: float
     class Config(): orm_mode=True
 
 class Ingrediente(BaseModel):
@@ -78,6 +80,7 @@ class ShowReceta(BaseModel):
 class ShowEstilo(BaseModel):
     id_estilo: Optional[int]
     nombre_estilo: str
+    multiplicador: float
     class Config(): orm_mode=True
 
 class ShowUser(BaseModel):
@@ -86,6 +89,7 @@ class ShowUser(BaseModel):
     estilo: ShowEstilo
     registro_completo: int
     correo: str
+    sexo: str
     class Config(): orm_mode=True
 
 class ShowCategoriaIngrediente(BaseModel):
