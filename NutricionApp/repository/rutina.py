@@ -4,8 +4,7 @@ from fastapi import HTTPException, status
 
 
 def create(request: schemas.Rutina, db: Session):
-    new_routine = models.Rutina(cantidad_comidas=request.cantidad_comidas,
-                              id_objetivo=request.id_objetivo,
+    new_routine = models.Rutina(id_objetivo=request.id_objetivo,
                               calorias_diarias=request.calorias_diarias,
                               vigente=request.vigente,
                               id_usuario=request.id_usuario)
@@ -13,6 +12,17 @@ def create(request: schemas.Rutina, db: Session):
     db.commit()
     db.refresh(new_routine)
     return new_routine
+
+def update(id_rutina: int, db:Session):
+    objetivo = db.query(models.Rutina).filter(models.Rutina.id_rutina == id_rutina).first()
+    if not objetivo:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"El usuario {id} no existe o no tiene objetivos actuales asociados")
+    objetivo.vigente=0
+    db.add(objetivo)
+    db.commit()
+    return objetivo
+
 
 
 def show(id: int, db: Session):
