@@ -19,7 +19,7 @@ def create_recipe(request: schemas.Receta, db: Session = Depends(get_db)):
     return receta.create(request, db)
 
 
-@router.get('/{id}', response_model=schemas.ShowRecetaIngredientes)
+@router.get('/{id}', response_model=schemas.ShowReceta)
 def get_recipe(id: int, db: Session = Depends(get_db)):
     return receta.show(id, db)
 
