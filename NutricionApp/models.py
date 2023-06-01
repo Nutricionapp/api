@@ -57,7 +57,6 @@ class IngredienteReceta(Base):
     id_receta=Column(Integer,ForeignKey('RECETA.id_receta'),primary_key=True,index=True)
     id_ingrediente=Column(Integer,ForeignKey('INGREDIENTE.id_ingrediente'),primary_key=True,index=True)
     cantidad_ingrediente=Column(Float)
-    calorias_ingrediente=Column(Float)
     recetas=relationship("Receta",back_populates="ingredientes_r")
     ingredientes=relationship("Ingrediente",back_populates="receta")
 

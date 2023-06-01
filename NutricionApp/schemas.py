@@ -70,13 +70,6 @@ class ShowEnfermedadUsuario(BaseModel):
     enfermedades_u: Enfermedad
     class Config(): orm_mode=True
 
-class ShowReceta(BaseModel):
-    nombre_receta: str
-    tipo_comida: str
-    preparacion: str
-    url_imagen: str
-    cantidad_calorias: float
-    class Config(): orm_mode=True
 class ShowEstilo(BaseModel):
     id_estilo: Optional[int]
     nombre_estilo: str
@@ -106,6 +99,7 @@ class ShowIngrediente(BaseModel):
 class ShowAlergiaUsuario(BaseModel):
     ingredient: ShowIngrediente
     class Config(): orm_mode=True
+
 class ShowAlergias(BaseModel):
     usuario: ShowUser
     ingredient: ShowIngrediente
@@ -120,19 +114,6 @@ class ShowPesoUsuario(BaseModel):
     peso: int
     fecha_toma: date
     class Config(): orm_mode = True
-
-class ShowIngredienteUsado(BaseModel):
-    id_ingrediente: int
-    calorias_ingrediente: float
-    class Config(): orm_mode = True
-
-class ShowRecetaIngredientes(BaseModel):
-    nombre_receta: str
-    tipo_comida: str
-    preparacion: str
-    cantidad_calorias: float
-    ingredientes_r: List[ShowIngredienteUsado]
-    class Config(): orm_mode=True
 
 class Objetivo(BaseModel):
     id_objetivo: Optional[int]
@@ -180,5 +161,34 @@ class ShowProgresoUsuario(BaseModel):
     fecha: date
     porcentaje_avance: float
     class Config(): orm_mode=True
+
+class IngredienteReceta(BaseModel):
+    id_receta: int
+    id_ingrediente: int
+    cantidad_ingrediente: float
+    class Config(): orm_mode=True
+
+class ShowIngredienteSinCalorias(BaseModel):
+    id_ingrediente: Optional[int]
+    nombre_ingrediente: str
+    class Config(): orm_mode = True
+
+class ShowIngredienteReceta(BaseModel):
+    ingredientes: ShowIngredienteSinCalorias
+    class Config(): orm_mode=True
+
+class ShowReceta(BaseModel):
+    nombre_receta: str
+    tipo_comida: str
+    preparacion: str
+    url_imagen: str
+    cantidad_calorias: float
+    class Config(): orm_mode=True
+
+class ShowRecetaCompleta(BaseModel):
+    recetas: ShowReceta
+    ingredientes: List[ShowIngrediente]
+    class Config(): orm_mode=True
+
 
 
