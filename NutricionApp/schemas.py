@@ -122,7 +122,6 @@ class Objetivo(BaseModel):
 
 class Rutina(BaseModel):
     id_rutina: Optional[int]
-    cantidad_comidas: int
     id_objetivo: int
     calorias_diarias: float
     vigente: int
@@ -137,30 +136,31 @@ class ShowObjetivo(BaseModel):
 class ShowRutina(BaseModel):
     id_rutina: Optional[int]
     objetivo: ShowObjetivo
-    cantidad_comidas: int
     calorias_diarias: int
     vigente: int
     class Config(): orm_mode = True
 
 class ShowRutinas(BaseModel):
     id_rutina: Optional[int]
-    cantidad_comidas: int
     objetivo: ShowObjetivo
     calorias_diarias: float
     vigente: int
     class Config(): orm_mode = True
 
-class ProgresoUsuario(BaseModel):
+class ProgresoDiario(BaseModel):
     id_registro: Optional[int]
     fecha: date
-    id_usuario: int
-    porcentaje_avance: float
+    id_desayuno: int
+    id_merienda1: int
+    id_almuerzo: int
+    id_merienda2: int
+    id_cena: int
+    calorias_extra: float
+    id_rutina: int
+    porcentaje: float
     class Config(): orm_mode=True
 
-class ShowProgresoUsuario(BaseModel):
-    fecha: date
-    porcentaje_avance: float
-    class Config(): orm_mode=True
+
 
 class IngredienteReceta(BaseModel):
     id_receta: int
@@ -175,6 +175,7 @@ class ShowIngredienteSinCalorias(BaseModel):
 
 class ShowIngredienteReceta(BaseModel):
     ingredientes: ShowIngredienteSinCalorias
+    cantidad_ingrediente: float
     class Config(): orm_mode=True
 
 class ShowReceta(BaseModel):
@@ -188,6 +189,17 @@ class ShowReceta(BaseModel):
 class ShowRecetaCompleta(BaseModel):
     recetas: ShowReceta
     ingredientes: List[ShowIngrediente]
+    class Config(): orm_mode=True
+
+class ShowProgresoDiario(BaseModel):
+    fecha: date
+    desayuno: ShowReceta
+    merienda1: ShowReceta
+    almuerzo: ShowReceta
+    merienda2: ShowReceta
+    cena: ShowReceta
+    calorias_extra: float
+    porcentaje: float
     class Config(): orm_mode=True
 
 

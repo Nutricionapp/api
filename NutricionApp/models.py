@@ -17,7 +17,6 @@ class Usuario(Base):
     pesos=relationship("Peso",back_populates="usuario_p")
     enfermedades=relationship("EnfermedadUsuario",back_populates="usuarios_e")
     rutinas_p=relationship("Rutina",back_populates="persona")
-    progreso=relationship("ProgresoDiario",back_populates="usuario_pr")
 
 class Ingrediente(Base):
     __tablename__='INGREDIENTE'
@@ -82,13 +81,13 @@ class Objetivo(Base):
 class Rutina(Base):
     __tablename__='RUTINA'
     id_rutina=Column(Integer,primary_key=True,index=True,autoincrement=True)
-    cantidad_comidas=Column(Integer)
     id_objetivo=Column(Integer,ForeignKey('OBJETIVO.id_objetivo'))
     calorias_diarias=Column(Float)
     vigente=Column(Integer)
     id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'))
     objetivo=relationship("Objetivo",back_populates="rutinas")
     persona=relationship("Usuario",back_populates="rutinas_p")
+    progreso=relationship("ProgresoDiario",back_populates="rutina")
 
 
 class CategoriaIngrediente(Base):
@@ -113,11 +112,27 @@ class Receta(Base):
     url_imagen=Column(String)
     cantidad_calorias=Column(Float)
     ingredientes_r=relationship("IngredienteReceta",back_populates="recetas")
+    r_desayuno=relationship("ProgresoDiario",back_populates="desayuno",foreign_keys="ProgresoDiario.id_desayuno")
+    r_merienda1 = relationship("ProgresoDiario", back_populates="merienda1",foreign_keys="ProgresoDiario.id_merienda1")
+    r_almuerzo = relationship("ProgresoDiario", back_populates="almuerzo",foreign_keys="ProgresoDiario.id_almuerzo")
+    r_merienda2 = relationship("ProgresoDiario", back_populates="merienda2",foreign_keys="ProgresoDiario.id_merienda2")
+    r_cena = relationship("ProgresoDiario", back_populates="cena",foreign_keys="ProgresoDiario.id_cena")
 
 class ProgresoDiario(Base):
     __tablename__='PROGRESO_DIARIO'
     id_registro=Column(Integer,primary_key=True,index=True,autoincrement=True)
     fecha=Column(Date)
-    id_usuario=Column(Integer,ForeignKey('USUARIO.id_usuario'))
-    porcentaje_avance=Column(Float)
-    usuario_pr=relationship("Usuario",back_populates="progreso")
+    id_desayuno=Column(Integer,ForeignKey('RECETA.id_receta'))
+    id_merienda1 = Column(Integer, ForeignKey('RECETA.id_receta'))
+    id_almuerzo = Column(Integer, ForeignKey('RECETA.id_receta'))
+    id_merienda2 = Column(Integer, ForeignKey('RECETA.id_receta'))
+    id_cena = Column(Integer, ForeignKey('RECETA.id_receta'))
+    calorias_extra = Column(Float)
+    id_rutina = Column(Integer, ForeignKey('RUTINA.id_rutina'))
+    porcentaje = Column(Float)
+    rutina=relationship("Rutina",back_populates="progreso")
+    desayuno=relationship("Receta",back_populates="r_desayuno",foreign_keys="ProgresoDiario.id_desayuno")
+    merienda1= relationship("Receta", back_populates="r_merienda1",foreign_keys="ProgresoDiario.id_merienda1")
+    almuerzo = relationship("Receta", back_populates="r_almuerzo",foreign_keys="ProgresoDiario.id_almuerzo")
+    merienda2 = relationship("Receta", back_populates="r_merienda2",foreign_keys="ProgresoDiario.id_merienda2")
+    cena = relationship("Receta", back_populates="r_cena",foreign_keys="ProgresoDiario.id_cena")
