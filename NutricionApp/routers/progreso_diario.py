@@ -10,20 +10,19 @@ router = APIRouter(
 )
 get_db = database.get_db
 
-"""@router.get('/',response_model=List[schemas.ShowProgresoDiario])
-def get_recipes(db: Session = Depends(get_db)):
-    return receta.get_all(db)"""
-
 @router.post('/', response_model=schemas.ShowProgresoDiario)
 def create_progress(db: Session = Depends(get_db)):
     return progreso_diario.create(db)
 
+@router.put("/porcentaje/{id_usuario}",status_code=status.HTTP_200_OK, response_model=schemas.ShowProgresoDiario)
+def update_percentage(id_usuario: int, db: Session = Depends(get_db)):
+    return progreso_diario.update(id_usuario,db)
 
-"""@router.get('/{id}', response_model=schemas.ShowReceta)
-def get_recipe(id: int, db: Session = Depends(get_db)):
-    return receta.show(id, db)
+@router.put("/extra/{id_usuario}/{calorias_extra}",status_code=status.HTTP_200_OK, response_model=schemas.ShowProgresoDiario)
+def update_extra(id_usuario: int, calorias_extra: float, db: Session = Depends(get_db)):
+    return progreso_diario.update_extra(id_usuario,calorias_extra,db)
 
-@router.get('/tipo_comida/{tipo_comida}', response_model=List[schemas.ShowReceta])
-def get_recipe_by_kind(tipo_comida: str, db: Session = Depends(get_db)):
-    return receta.show_tipo_comida(tipo_comida, db)"""
+@router.get('/{id_usuario}', response_model=schemas.ShowProgresoDiario)
+def get_progress(id_usuario: int, db: Session = Depends(get_db)):
+    return progreso_diario.show_progreso_usuario(id_usuario, db)
 

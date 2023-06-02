@@ -43,28 +43,37 @@ def create(db: Session):
         db.refresh(new_progreso)
     return new_progreso
 
-"""def update(id_rutina: int, db:Session):
-    objetivo = db.query(models.Rutina).filter(models.Rutina.id_rutina == id_rutina).first()
+def update(id_usuario: int, db:Session):
+    rutina_usuario = db.query(models.Rutina).filter(models.Rutina.id_usuario == id_usuario,models.Rutina.vigente == 1).first()
+    id_rutina=rutina_usuario.id_rutina
+    objetivo = db.query(models.ProgresoDiario).filter(models.ProgresoDiario.id_rutina == id_rutina).first()
     if not objetivo:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"El usuario {id} no existe o no tiene objetivos actuales asociados")
-    objetivo.vigente=0
+                            detail=f"El usuario {id} no tiene progreso el día de hoy")
+    objetivo.porcentaje+=25
+    db.add(objetivo)
+    db.commit()
+    return objetivo
+
+def update_extra(id_usuario: int, calorias: float, db:Session):
+    rutina_usuario = db.query(models.Rutina).filter(models.Rutina.id_usuario == id_usuario,models.Rutina.vigente == 1).first()
+    id_rutina=rutina_usuario.id_rutina
+    objetivo = db.query(models.ProgresoDiario).filter(models.ProgresoDiario.id_rutina == id_rutina).first()
+    if not objetivo:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"El usuario {id} no tiene progreso el día de hoy")
+    objetivo.calorias_extra+=calorias
     db.add(objetivo)
     db.commit()
     return objetivo
 
 
 
-def show(id: int, db: Session):
-    rutinas = db.query(models.Rutina).filter(models.Rutina.id_usuario == id).all()
-    if not rutinas:
+def show_progreso_usuario(id_usuario: int, db: Session):
+    rutina_usuario = db.query(models.Rutina).filter(models.Rutina.id_usuario == id_usuario, models.Rutina.vigente==1).first()
+    id_rutina=rutina_usuario.id_rutina
+    progreso = db.query(models.ProgresoDiario).filter(models.ProgresoDiario.id_rutina == id_rutina).first()
+    if not progreso:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"El usuario {id} no existe o no tiene rutinas asociadas")
-    return rutinas
-
-def show_rutina_actual(id_usuario: int, db: Session):
-    objetivo = db.query(models.Rutina).filter(models.Rutina.id_usuario == id_usuario,models.Rutina.vigente==1).first()
-    if not objetivo:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"El usuario {id} no existe o no tiene objetivos actuales asociados")
-    return objetivo"""
+                            detail=f"El usuario {id_usuario} no tiene progreso para el día de hoy")
+    return progreso
