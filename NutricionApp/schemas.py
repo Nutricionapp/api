@@ -157,6 +157,7 @@ class ProgresoDiario(BaseModel):
     id_cena: int
     calorias_extra: float
     id_rutina: int
+    porcentaje: float
     class Config(): orm_mode=True
 
 
@@ -174,6 +175,7 @@ class ShowIngredienteSinCalorias(BaseModel):
 
 class ShowIngredienteReceta(BaseModel):
     ingredientes: ShowIngredienteSinCalorias
+    cantidad_ingrediente: float
     class Config(): orm_mode=True
 
 class ShowReceta(BaseModel):
@@ -197,6 +199,7 @@ class ShowProgresoDiario(BaseModel):
     merienda2: ShowReceta
     cena: ShowReceta
     calorias_extra: float
+    porcentaje: float
     class Config(): orm_mode=True
 
 

@@ -129,6 +129,7 @@ class ProgresoDiario(Base):
     id_cena = Column(Integer, ForeignKey('RECETA.id_receta'))
     calorias_extra = Column(Float)
     id_rutina = Column(Integer, ForeignKey('RUTINA.id_rutina'))
+    porcentaje = Column(Float)
     rutina=relationship("Rutina",back_populates="progreso")
     desayuno=relationship("Receta",back_populates="r_desayuno",foreign_keys="ProgresoDiario.id_desayuno")
     merienda1= relationship("Receta", back_populates="r_merienda1",foreign_keys="ProgresoDiario.id_merienda1")
