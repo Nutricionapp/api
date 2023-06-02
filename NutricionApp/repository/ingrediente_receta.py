@@ -1,6 +1,8 @@
-from sqlalchemy.orm import Session
-from .. import models, schemas
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+
+from .. import models, schemas
+
 
 def create(request: schemas.IngredienteReceta, db: Session):
     new_ingrediente = models.IngredienteReceta(id_receta=request.id_receta,
@@ -10,6 +12,7 @@ def create(request: schemas.IngredienteReceta, db: Session):
     db.commit()
     db.refresh(new_ingrediente)
     return new_ingrediente
+
 
 def show(id_receta: int, db: Session):
     ingrediente = db.query(models.IngredienteReceta).filter(models.IngredienteReceta.id_receta == id_receta).all()

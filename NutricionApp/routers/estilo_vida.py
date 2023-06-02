@@ -1,7 +1,9 @@
 from typing import List
-from NutricionApp import database, schemas, models
+
+from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, status
+
+from NutricionApp import database, schemas
 from NutricionApp.repository import estilo_vida
 
 router = APIRouter(
@@ -10,9 +12,12 @@ router = APIRouter(
 )
 get_db = database.get_db
 
-@router.get('/',response_model=List[schemas.ShowEstilo])
+
+@router.get('/', response_model=List[schemas.ShowEstilo])
 def get_styles(db: Session = Depends(get_db)):
     return estilo_vida.get_all(db)
+
+
 @router.post('/', response_model=schemas.ShowEstilo)
 def create_style(request: schemas.EstiloVida, db: Session = Depends(get_db)):
     return estilo_vida.create(request, db)

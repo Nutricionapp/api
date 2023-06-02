@@ -1,6 +1,7 @@
-from sqlalchemy.orm import Session
-from .. import models, schemas
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+
+from .. import models, schemas
 
 
 def create(request: schemas.Usuario, db: Session):
@@ -22,6 +23,7 @@ def show(id: int, db: Session):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"User with the id {id} is not available")
     return user
+
 
 def show_by_email(correo: str, db: Session):
     user = db.query(models.Usuario).filter(models.Usuario.correo == correo).first()

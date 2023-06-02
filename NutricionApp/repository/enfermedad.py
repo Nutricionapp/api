@@ -1,10 +1,13 @@
-from sqlalchemy.orm import Session
-from .. import models, schemas
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+
+from .. import models, schemas
+
 
 def get_all(db: Session):
     enfermedades = db.query(models.Enfermedad).all()
     return enfermedades
+
 
 def create(request: schemas.Enfermedad, db: Session):
     new_enfermedad = models.Enfermedad(nombre_enfermedad=request.nombre_enfermedad)

@@ -1,6 +1,7 @@
-from NutricionApp import database, schemas, models
-from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, status
+from sqlalchemy.orm import Session
+
+from NutricionApp import database, schemas
 from NutricionApp.repository import usuario
 
 router = APIRouter(
@@ -18,8 +19,9 @@ def create_user(request: schemas.Usuario, db: Session = Depends(get_db)):
 
 @router.get('/{id}', status_code=200, response_model=schemas.ShowUser)
 def show(id: int, db: Session = Depends(get_db)):
-    return usuario.show(id,db)
+    return usuario.show(id, db)
+
 
 @router.get('/correo/{correo}', status_code=200, response_model=schemas.ShowUser)
 def show_by_email(correo: str, db: Session = Depends(get_db)):
-    return usuario.show_by_email(correo,db)
+    return usuario.show_by_email(correo, db)

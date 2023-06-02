@@ -1,10 +1,13 @@
-from sqlalchemy.orm import Session
-from .. import models, schemas
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+
+from .. import models, schemas
+
 
 def get_all(db: Session):
     categorias = db.query(models.CategoriaIngrediente).all()
     return categorias
+
 
 def create(request: schemas.CategoriaIngrediente, db: Session):
     new_categoria = models.CategoriaIngrediente(nombre_categoria=request.nombre_categoria)

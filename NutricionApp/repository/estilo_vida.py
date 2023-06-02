@@ -1,10 +1,14 @@
-from sqlalchemy.orm import Session
-from .. import models, schemas
 from fastapi import HTTPException, status
+from sqlalchemy.orm import Session
+
+from .. import models, schemas
+
 
 def get_all(db: Session):
     estilos = db.query(models.EstiloVida).all()
     return estilos
+
+
 def create(request: schemas.EstiloVida, db: Session):
     new_style = models.EstiloVida(nombre_estilo=request.nombre_estilo,
                                   multiplicador=request.multiplicador)
