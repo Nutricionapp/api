@@ -31,3 +31,7 @@ def get_recipe(id: int, db: Session = Depends(get_db)):
 @router.get('/tipo_comida/{tipo_comida}', response_model=List[schemas.ShowReceta])
 def get_recipe_by_kind(tipo_comida: str, db: Session = Depends(get_db)):
     return receta.show_tipo_comida(tipo_comida, db)
+
+@router.put('/cambiar_preparacion/{id_receta}/{preparacion}',response_model=schemas.ShowReceta)
+def update_preparation(id_receta: int, preparacion: str, db: Session = Depends(get_db)):
+    return receta.cambiar_preparacion(id_receta,preparacion,db)
