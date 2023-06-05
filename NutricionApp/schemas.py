@@ -235,6 +235,7 @@ class ShowIngredienteReceta(BaseModel):
 
 
 class ShowReceta(BaseModel):
+    id_receta: int
     nombre_receta: str
     tipo_comida: str
     preparacion: str
