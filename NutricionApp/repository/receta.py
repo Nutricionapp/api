@@ -14,7 +14,9 @@ def create(request: schemas.Receta, db: Session):
                                tipo_comida=request.tipo_comdida,
                                preparacion=request.preparacion,
                                url_imagen=request.url_imagen,
-                               cantidad_calorias=request.cantidad_calorias)
+                               cantidad_calorias=request.cantidad_calorias,
+                               calificacion=request.calificacion,
+                               id_autor=request.id_autor)
     db.add(new_recipe)
     db.commit()
     db.refresh(new_recipe)

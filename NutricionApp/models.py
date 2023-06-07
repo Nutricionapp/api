@@ -19,6 +19,7 @@ class Usuario(Base):
     pesos = relationship("Peso", back_populates="usuario_p")
     enfermedades = relationship("EnfermedadUsuario", back_populates="usuarios_e")
     rutinas_p = relationship("Rutina", back_populates="persona")
+    recetas_autor = relationship("Receta", back_populates="autor")
 
 
 class Ingrediente(Base):
@@ -87,6 +88,7 @@ class Objetivo(Base):
     id_objetivo = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nombre_objetivo = Column(String)
     rutinas = relationship("Rutina", back_populates="objetivo")
+    tips = relationship("Tip", back_populates="objetivo_t")
 
 
 class Rutina(Base):
@@ -124,12 +126,15 @@ class Receta(Base):
     preparacion = Column(String)
     url_imagen = Column(String)
     cantidad_calorias = Column(Float)
+    calificacion = Column(Float)
+    id_autor = Column(Integer,ForeignKey('USUARIO.id_usuario'))
     ingredientes_r = relationship("IngredienteReceta", back_populates="recetas")
     r_desayuno = relationship("ProgresoDiario", back_populates="desayuno", foreign_keys="ProgresoDiario.id_desayuno")
     r_merienda1 = relationship("ProgresoDiario", back_populates="merienda1", foreign_keys="ProgresoDiario.id_merienda1")
     r_almuerzo = relationship("ProgresoDiario", back_populates="almuerzo", foreign_keys="ProgresoDiario.id_almuerzo")
     r_merienda2 = relationship("ProgresoDiario", back_populates="merienda2", foreign_keys="ProgresoDiario.id_merienda2")
     r_cena = relationship("ProgresoDiario", back_populates="cena", foreign_keys="ProgresoDiario.id_cena")
+    autor = relationship("Usuario", back_populates="recetas_autor")
 
 
 class ProgresoDiario(Base):
@@ -150,3 +155,10 @@ class ProgresoDiario(Base):
     almuerzo = relationship("Receta", back_populates="r_almuerzo", foreign_keys="ProgresoDiario.id_almuerzo")
     merienda2 = relationship("Receta", back_populates="r_merienda2", foreign_keys="ProgresoDiario.id_merienda2")
     cena = relationship("Receta", back_populates="r_cena", foreign_keys="ProgresoDiario.id_cena")
+
+class Tip(Base):
+    __tablename__ = 'TIP'
+    id_tip = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id_objetivo = Column(Integer, ForeignKey('OBJETIVO.id_objetivo'))
+    tip = Column(String)
+    objetivo_t = relationship("Objetivo", back_populates="tips")

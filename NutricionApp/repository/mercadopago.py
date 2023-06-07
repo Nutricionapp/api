@@ -1,10 +1,9 @@
-from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import Optional
-# SDK de Mercado Pago
 import mercadopago
-# Agrega credenciales
-sdk = mercadopago.SDK("PROD_ACCESS_TOKEN")
+
+
+
+sdk = mercadopago.SDK("")
 
 class dataMercadoPago (BaseModel):#"no es necesario guardar modelo, solo necesitamos generar el id para usarlo en el frontend"
     title:str
@@ -30,7 +29,6 @@ def getPreferenceID(Mercadopago:dataMercadoPago):#puse get como nombre pero tien
         "back_urls": {
             "success": "https://nutricion-app-frontend.vercel.app/",
             "failure": "https://nutricion-app-frontend.vercel.app/",
-            "pending": "https://www.tu-sitio/pendings"
         },
         "auto_return": "approved"
     }

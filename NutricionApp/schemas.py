@@ -70,7 +70,8 @@ class Receta(BaseModel):
     preparacion: str
     url_imagen: str
     cantidad_calorias: float
-
+    calificacion: float
+    id_autor: int
     class Config(): orm_mode = True
 
 
@@ -178,6 +179,17 @@ class ShowObjetivo(BaseModel):
 
     class Config(): orm_mode = True
 
+class Tip(BaseModel):
+    id_tip: Optional[int]
+    id_objetivo: int
+    tip: str
+    class Config(): orm_mode = True
+
+class ShowTip(BaseModel):
+    objetivo_t: ShowObjetivo
+    tip: str
+    class Config(): orm_mode = True
+
 
 class ShowRutina(BaseModel):
     id_rutina: Optional[int]
@@ -233,6 +245,10 @@ class ShowIngredienteReceta(BaseModel):
 
     class Config(): orm_mode = True
 
+class ShowUsername(BaseModel):
+    id_usuario: int
+    nombre_usuario: str
+    class Config(): orm_mode = True
 
 class ShowReceta(BaseModel):
     id_receta: int
@@ -241,6 +257,8 @@ class ShowReceta(BaseModel):
     preparacion: str
     url_imagen: str
     cantidad_calorias: float
+    calificacion: float
+    autor: ShowUsername
 
     class Config(): orm_mode = True
 
