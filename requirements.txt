@@ -5,3 +5,4 @@ python-jose
 python-multipart
 pydantic
 psycopg2
+mercadopago
