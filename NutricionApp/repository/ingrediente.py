@@ -5,7 +5,7 @@ from .. import models, schemas
 
 
 def get_all(db: Session):
-    ingredientes = db.query(models.Ingrediente).all()
+    ingredientes = db.query(models.Ingrediente).order_by(models.Ingrediente.nombre_ingrediente).all()
     return ingredientes
 
 
